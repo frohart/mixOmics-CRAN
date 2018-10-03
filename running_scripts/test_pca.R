@@ -67,6 +67,41 @@ plotVar(pca.res, rad.in = 0.5, cex = 0.5,style="3d")
 
 plotLoadings(pca.res)
 
+##### TEST MAE
+library(mixOmics)
+showMethods(pca)
+
+library(MultiAssayExperiment)
+library(S4Vectors)
+data(nutrimouse)
+# Need to transpose matrices to be stored into experiments slot
+X <- t(nutrimouse$lipid)
+Y <- t(nutrimouse$gene)
+# information biological units for colData component
+info.sample <- DataFrame(diet=nutrimouse$diet, genotype=nutrimouse$genotype)
+rownames(info.sample) <- 1:40 # needed
+
+nutrimouse.mae <- MultiAssayExperiment(
+experiments = ExperimentList(list(lipid=X, gene=Y)),
+colData = info.sample)
+
+pca.res1 <- pca(nutrimouse$lipid)
+pca.res2 <- pca(nutrimouse.mae,"lipid")
+pca.res3 <- pca(nutrimouse.mae,"lipid", ncomp=5)
+pca.res4 <- pca(nutrimouse.mae,~lipid)  # one-sided formula
+
+plotIndiv(pca.res1)
+plotIndiv(pca.res2)
+plotIndiv(pca.res3)
+plotIndiv(pca.res4)
+
+
+# plotIndiv using colData
+plotIndiv(pca.res2, ind.names=FALSE, legend=TRUE,
+group = colData(nutrimouse.mae)$diet,
+pch = as.integer(colData(nutrimouse.mae)$genotype))
+
+
 #######################################################################################################
 #######################################################################################################
 #                                           additional tests

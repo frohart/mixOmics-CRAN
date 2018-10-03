@@ -29,7 +29,7 @@
 #############################################################################################################
 
 
-pca = function(   X,
+mixo_pca = function(   X,
 ncomp = 2,
 center = TRUE,
 scale = FALSE,
@@ -52,6 +52,8 @@ multilevel = NULL)
     
     if ("simpleError" %in% class(err))
     stop(err[[1]], ".", call. = FALSE)
+    
+    print(class(X))
     
     #-- X matrix
     if (is.data.frame(X))

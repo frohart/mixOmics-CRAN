@@ -23,27 +23,39 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 ################################################################################
 
-if(FALSE){
+################################################################################
+###                 PCA
+################################################################################
 setGeneric(name = "pca", def = function(X, Y=NULL, ...) standardGeneric("pca"))
 
 setMethod(f = "pca",
 signature = signature("MultiAssayExperiment","character"),
 definition = function(X, Y, ...) {
     tdm <- function(x) data.matrix(t(x))
-    mixOmics::pca( tdm(experiments(X)[[Y]]), ... ) } )
+    mixo_pca( tdm(experiments(X)[[Y]]), ... ) } )
 
 setMethod(f = "pca",  # with a one-sided formula ~lipid
 signature = signature("MultiAssayExperiment","formula"),
 definition = function(X, Y, ...) {
     Y = as.character(as.list(Y)[[2]])
     tdm <- function(x) data.matrix(t(x))
-    mixOmics::pca( tdm(experiments(X)[[Y]]), ... )    
+    mixo_pca( tdm(experiments(X)[[Y]]), ... )
 } )
 
 setMethod(f = "pca",
-signature = "data.frame",
-definition = function(X, Y=NULL, ...)  mixOmics::pca(X, ...) )
+signature = "matrix",
+definition = function(X, Y=NULL, ...)  mixo_pca(X, ...) )
 
+setMethod(f = "pca",
+signature = "data.frame",
+definition = function(X, Y=NULL, ...)  mixo_pca(X, ...) )
+
+
+if(FALSE){
+
+################################################################################
+###                 sPCA
+################################################################################
 
 setGeneric(name = "spca", def = function(X, Y=NULL,  ...) standardGeneric("spca"))
 
@@ -66,6 +78,9 @@ setMethod(f = "spca", signature=signature("data.frame"),
 definition = function(X, Y=NULL, ...) mixOmics::spca(X, ...))
 
 
+################################################################################
+###                 iPCA
+################################################################################
 
 setGeneric(name = "ipca", def = function(X, Y=NULL, ...) standardGeneric("ipca"))
 
@@ -87,6 +102,9 @@ signature = "data.frame",
 definition = function(X, Y=NULL, ...)  mixOmics::ipca(X, ...) )
 
 
+################################################################################
+###                 siPCA
+################################################################################
 
 setGeneric(name = "sipca", def = function(X, Y=NULL,  ...) standardGeneric("sipca"))
 
@@ -108,6 +126,9 @@ setMethod(f = "sipca", signature=signature("data.frame"),
 definition = function(X, Y=NULL, ...) mixOmics::sipca(X, ...))
 
 
+################################################################################
+###                 PLSDA
+################################################################################
 
 setGeneric(name = "plsda", def = function(X, Y, ...) standardGeneric("plsda"))
 
@@ -123,6 +144,9 @@ setMethod(f = "plsda", signature=signature("data.frame", "factor"),
 definition = function(X, Y, ...) mixOmics::plsda(X, Y, ...))
 
 
+################################################################################
+###                 sPLSDA
+################################################################################
 
 setGeneric(name = "splsda", def = function(X, Y, ...) standardGeneric("splsda"))
 
@@ -138,6 +162,9 @@ setMethod(f = "splsda", signature=signature("data.frame", "factor"),
 definition = function(X, Y, ...) mixOmics::splsda(X, Y, ...))
 
 
+################################################################################
+###                 PLS
+################################################################################
 
 setGeneric("pls", function(X, Y, ...) standardGeneric("pls"))
 
@@ -168,6 +195,9 @@ setMethod("pls", c("data.frame", "data.frame"), function(X, Y, ...) {
 
 
 
+################################################################################
+###                 sPLS
+################################################################################
 
 setGeneric("spls", function(X, Y, ...) standardGeneric("spls"))
 
@@ -196,6 +226,9 @@ setMethod("spls", c("data.frame", "data.frame"), function(X, Y, ...) {
     mixOmics::spls(X, Y, ...)
 })
 
+################################################################################
+###                 RCC
+################################################################################
 
 setGeneric("rcc", function(X, Y, ...) standardGeneric("rcc"))
 
@@ -216,7 +249,9 @@ setMethod("rcc", c("data.frame", "data.frame"), function(X, Y, ...) {
 
 # No formula with MAE because it could be misleading
 
-
+################################################################################
+###                 block.pls
+################################################################################
 
 setGeneric("block.pls", function(X, Y, ...) standardGeneric("block.pls"))
 
@@ -266,6 +301,9 @@ function(X, Y, ...) {
 })
 
 
+################################################################################
+###                 block.spls
+################################################################################
 
 setGeneric("block.spls", function(X, Y, ...) standardGeneric("block.spls"))
 
@@ -315,6 +353,9 @@ function(X, Y, ...) {
 })
 
 
+################################################################################
+###                 block.plsda
+################################################################################
 
 setGeneric("block.plsda", function(X, Y, ...) standardGeneric("block.plsda"))
 
@@ -357,6 +398,9 @@ function(X, Y, ...) {
 })
 
 
+################################################################################
+###                 block.splsda
+################################################################################
 
 setGeneric("block.splsda", function(X, Y, ...) standardGeneric("block.splsda"))
 
@@ -399,6 +443,9 @@ function(X, Y, ...) {
 })
 
 
+################################################################################
+###                 wrapper.rgcca
+################################################################################
 
 setGeneric("wrapper.rgcca", function(X, Y = NULL, ...) standardGeneric("wrapper.rgcca"))
 
@@ -438,6 +485,9 @@ function(X, Y = NULL, ...) {
     mixOmics::wrapper.rgcca(X, ...)
 })
 
+################################################################################
+###                 wrapper.sgcca
+################################################################################
 
 setGeneric("wrapper.sgcca", function(X, Y = NULL, ...) standardGeneric("wrapper.sgcca"))
 
@@ -478,6 +528,9 @@ function(X, Y = NULL, ...) {
 })
 
 
+################################################################################
+###                 wrapper.sgccda
+################################################################################
 
 setGeneric("wrapper.sgccda", function(X, Y, ...) standardGeneric("wrapper.sgccda"))
 

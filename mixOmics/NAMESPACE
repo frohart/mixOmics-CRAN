@@ -44,6 +44,10 @@ importFrom("rARPACK","svds")
 
 importFrom("gridExtra", "grid.arrange")
 
+importFrom("MultiAssayExperiment", "experiments")
+
+exportMethods(pca)
+
 export(
 auroc,
 background.predict,
@@ -80,7 +84,6 @@ mixOmics,
 nearZeroVar,
 network,
 nipals, 
-pca,
 perf,
 plotArrow,
 plotDiablo,

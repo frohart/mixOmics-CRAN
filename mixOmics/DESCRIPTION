@@ -4,8 +4,8 @@ Title: Omics Data Integration Project
 Version: 6.4.0
 Date: 2018-10-03
 Depends: R (>= 3.5.0), MASS, lattice, ggplot2
-Imports: igraph, rgl, ellipse, corpcor, RColorBrewer, parallel,
-        dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra, grDevices, graphics, stats, utils
+Imports: igraph, rgl, ellipse, corpcor, RColorBrewer, parallel, MultiAssayExperiment,
+        dplyr, tidyr, reshape2, methods, matrixStats, rARPACK, gridExtra, grDevices, graphics, stats, utils,
 Suggests: BiocStyle, knitr, rmarkdown
 Author: Kim-Anh Le Cao, Florian Rohart, Ignacio Gonzalez, Sebastien Dejean with key contributors Benoit Gautier, Francois Bartolo
         and contributions from Pierre Monget, Jeff Coquery, FangZou Yao, Benoit Liquet. 

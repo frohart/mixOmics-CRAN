@@ -6,3 +6,4 @@ MyR/
 *.Rhistory
 *.Rdata
 *.html
+.Rproj.user

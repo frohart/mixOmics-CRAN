@@ -85,7 +85,8 @@ nutrimouse.mae <- MultiAssayExperiment(
 experiments = ExperimentList(list(lipid=X, gene=Y)),
 colData = info.sample)
 
-pca.res1 <- pca(nutrimouse$lipid)
+pca.res0 <- pca(t(X)) #matrix input
+pca.res1 <- pca(nutrimouse$lipid) #data.frame input
 pca.res2 <- pca(nutrimouse.mae,"lipid")
 pca.res3 <- pca(nutrimouse.mae,"lipid", ncomp=5)
 pca.res4 <- pca(nutrimouse.mae,~lipid)  # one-sided formula

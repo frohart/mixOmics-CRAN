@@ -1,6 +1,11 @@
+\docType{methods}
 \name{pca}
 \encoding{UTF-8}
 \alias{pca}
+\alias{pca,MultiAssayExperiment,character-method}
+\alias{pca,MultiAssayExperiment,formula-method}
+\alias{pca,matrix,ANY-method}
+\alias{pca,data.frame,ANY-method}
 
 \title{Principal Components Analysis}
 
@@ -11,8 +16,9 @@ Decomposition, if there are some missing values, it uses the NIPALS algorithm.
 }
 
 \usage{
-pca(X,
-ncomp = 2,
+pca(X, Y=NULL, ...)
+
+\S4method{pca}{MultiAssayExperiment,character}(X, Y, ncomp = 2,
 center = TRUE,
 scale = FALSE,
 max.iter = 500,
@@ -21,11 +27,45 @@ logratio = 'none',  # one of ('none','CLR','ILR')
 ilr.offset = 0.001,
 V = NULL,
 multilevel = NULL)
+
+\S4method{pca}{MultiAssayExperiment,formula}(X, Y, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',  # one of ('none','CLR','ILR')
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL)
+
+\S4method{pca}{matrix,ANY}(X, Y=NULL, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',  # one of ('none','CLR','ILR')
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL)
+
+\S4method{pca}{data.frame,ANY}(X, Y=NULL, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',  # one of ('none','CLR','ILR')
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL)
+
 }
 
 \arguments{
 \item{X}{a numeric matrix (or data frame) which provides the
 data for the principal components analysis. It can contain missing values.}
+\item{Y}{Only for MultiAssayExperiment. Either a formula or the name of the data to be used}
+\item{...}{Additional parameters to describe the model}
+
 \item{ncomp}{integer, if data is complete \code{ncomp} decides the number of components and associated
 eigenvalues to display from the \code{pcasvd} algorithm and if the data has missing values,
 \code{ncomp} gives the number of components to keep to perform the reconstitution of the data using

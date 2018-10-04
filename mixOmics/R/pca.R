@@ -52,9 +52,7 @@ multilevel = NULL)
     
     if ("simpleError" %in% class(err))
     stop(err[[1]], ".", call. = FALSE)
-    
-    print(class(X))
-    
+        
     #-- X matrix
     if (is.data.frame(X))
     X = as.matrix(X)

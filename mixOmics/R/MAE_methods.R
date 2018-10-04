@@ -30,25 +30,63 @@ setGeneric(name = "pca", def = function(X, Y=NULL, ...) standardGeneric("pca"))
 
 setMethod(f = "pca",
 signature = signature("MultiAssayExperiment","character"),
-definition = function(X, Y, ...) {
+definition = function(X, Y, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL) {
     tdm <- function(x) data.matrix(t(x))
-    mixo_pca( tdm(experiments(X)[[Y]]), ... ) } )
+    mixo_pca( tdm(experiments(X)[[Y]]), ncomp,center,scale,max.iter,
+    tol,logratio,ilr.offset,V,multilevel) } )
 
 setMethod(f = "pca",  # with a one-sided formula ~lipid
 signature = signature("MultiAssayExperiment","formula"),
-definition = function(X, Y, ...) {
+definition = function(X, Y, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL) {
     Y = as.character(as.list(Y)[[2]])
     tdm <- function(x) data.matrix(t(x))
-    mixo_pca( tdm(experiments(X)[[Y]]), ... )
+    mixo_pca( tdm(experiments(X)[[Y]]),ncomp,center,scale,max.iter,
+    tol,logratio,ilr.offset,V,multilevel )
 } )
+
 
 setMethod(f = "pca",
 signature = "matrix",
-definition = function(X, Y=NULL, ...)  mixo_pca(X, ...) )
+definition = function(X, Y=NULL, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL)  mixo_pca(X,ncomp,center,scale,max.iter,
+tol,logratio,ilr.offset,V,multilevel) )
+
 
 setMethod(f = "pca",
 signature = "data.frame",
-definition = function(X, Y=NULL, ...)  mixo_pca(X, ...) )
+definition = function(X, Y=NULL, ncomp = 2,
+center = TRUE,
+scale = FALSE,
+max.iter = 500,
+tol = 1e-09,
+logratio = 'none',
+ilr.offset = 0.001,
+V = NULL,
+multilevel = NULL)  mixo_pca(X,ncomp,center,scale,max.iter,
+tol,logratio,ilr.offset,V,multilevel) )
 
 
 if(FALSE){

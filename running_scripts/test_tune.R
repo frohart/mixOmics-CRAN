@@ -11,7 +11,7 @@
 #######################################################################################################
 opar <- par(no.readonly = TRUE)
 
-progressBar = FALSE
+progressBar = TRUE
 
 # splsda
 # ----
@@ -20,7 +20,27 @@ data(breast.tumors)
 X <- breast.tumors$gene.exp
 Y <- as.factor(breast.tumors$sample$treatment)
 
- system.time(tune1 <- tune.splsda(X,Y,ncomp=3,nrepeat=1,logratio="none",test.keepX = seq(5,100,5),folds=3,dist="max.dist", progressBar = progressBar,cpus=4))
+system.time(tune2 <- tune.splsda(X,Y,ncomp=2,nrepeat=5,logratio="none",
+test.keepX = c(5,10,15,1000,2000),folds=3,dist="max.dist", progressBar = progressBar,
+measure="AUC"))
+
+
+system.time(tune2 <- tune.splsda(X,Y,ncomp=1,nrepeat=5,logratio="none",
+test.keepX = seq(5,100,5),folds=3,dist="max.dist", progressBar = progressBar,
+cpus=4, measure="AUC"))
+
+
+
+tune0 <- tune.splsda(X,Y,ncomp=1,nrepeat=3,logratio="none",
+test.keepX = seq(5,100,5),folds=3,dist="max.dist", progressBar = progressBar,
+measure="AUC", auc=TRUE, light.output=FALSE)
+
+
+ system.time(tune1 <- tune.splsda(X,Y,ncomp=3,nrepeat=5,logratio="none",
+test.keepX = seq(5,100,5),folds=3,dist="max.dist", progressBar = progressBar,
+cpus=4, auc=TRUE, light.output=FALSE))
+
+
 
 
 res <- splsda(X, Y, ncomp = 2, keepX = c(25, 25))
@@ -57,6 +77,16 @@ plot(tune)
 
 #source("mixOmics/R/tune.splsda.R")
 #source("mixOmics/R/MCVfold.R")
+
+
+library(mixOmics)
+data(liver.toxicity)
+X <- as.matrix(liver.toxicity$gene)
+Y <- as.factor(liver.toxicity$treatment[, 4])
+
+#tune= tune.splsda(X,Y,ncomp=1,nrepeat=5,logratio="none",test.keepX = c(5,10,15,20),folds=10,dist="max.dist", progressBar = progressBar,auc=TRUE,light.output=FALSE)
+
+tune= tune.splsda(X,Y,ncomp=1,nrepeat=5,logratio="none",test.keepX = c(5,10,15,20),folds=10,dist="max.dist", progressBar = progressBar,auc=TRUE,light.output=FALSE, measure="AUC")
 
 
 data(vac18)

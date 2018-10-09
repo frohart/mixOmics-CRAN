@@ -62,21 +62,7 @@ multilevel = NULL) {
 
 
 setMethod(f = "pca",
-signature = "matrix",
-definition = function(X, Y=NULL, ncomp = 2,
-center = TRUE,
-scale = FALSE,
-max.iter = 500,
-tol = 1e-09,
-logratio = 'none',
-ilr.offset = 0.001,
-V = NULL,
-multilevel = NULL)  mixo_pca(X,ncomp,center,scale,max.iter,
-tol,logratio,ilr.offset,V,multilevel) )
-
-
-setMethod(f = "pca",
-signature = "data.frame",
+signature = c("ANY","ANY"),
 definition = function(X, Y=NULL, ncomp = 2,
 center = TRUE,
 scale = FALSE,

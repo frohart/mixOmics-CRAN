@@ -63,6 +63,8 @@ keepX = c(rep(10, ncomp)), keepY = c(rep(4,ncomp)))
 ##set.seed(45)
 model.spls.val <- perf(model.spls, validation = "Mfold", folds = 5 )#validation = "loo")
 
+model.spls.val$features$stable.X
+
 #Q2 total
 model.spls.val$Q2.total
 
